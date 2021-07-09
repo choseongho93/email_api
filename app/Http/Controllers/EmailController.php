@@ -58,10 +58,11 @@ class EmailController extends Controller
         }
         $excel_data['header'][0] = $header_row_all;
 
-        $tmp_path_name = $this->makeExcel($new_row_data, $excel_data, 'log');
+        $tmp_path_name = $this->makeExcel($new_row_data, $excel_data, 'User');
 
+        $this->sendEmailReminder($tmp_path_name);
+        File::delete($tmp_path_name);
 
-//        File::delete($tmp_path_name);
         exit;
 
 
@@ -98,4 +99,48 @@ class EmailController extends Controller
         $filename = sprintf('data_%s_%s_%06d_' . $title . '.xlsx', date('Ymd'), date('His'), $usec_str);
         return $filename;
     }
+
+    public function sendEmailReminder($tmp_path_name)
+    {
+
+        $this->attachment_email($tmp_path_name);
+
+    }
+
+
+    public function basic_email() {
+        $data = array('name'=>"Virat Gandhi");
+
+        Mail::send([], $data, function($message) {
+            $message->to('abc@gmail.com', 'Tutorials Point')->subject
+            ('Laravel HTML Testing Mail');
+            $message->from('xyz@gmail.com','리스트 정기 발송');
+        });
+        echo "Basic Email Sent. Check your inbox.";
+    }
+
+    public function html_email() {
+        $data = array('name'=>"Virat Gandhi");
+        Mail::send('mail', $data, function($message) {
+            $message->to('abc@gmail.com', 'Tutorials Point')->subject
+            ('Laravel HTML Testing Mail');
+            $message->from('xyz@gmail.com','Virat Gandhi');
+        });
+        echo "HTML Email Sent. Check your inbox.";
+    }
+
+    public function attachment_email($tmp_path_name) {
+        $data = array('name'=>"Virat Gandhi");
+
+        Mail::send([], $data, function($message) use ($tmp_path_name) {
+            $message->to('abc@gmail.com', 'Tutorials Point')->subject
+            ('Laravel HTML Testing Mail');
+            $message->attach($tmp_path_name);
+            $message->from('xyz@gmail.com','리스트 정기 발송');
+        });
+        echo "Email Sent with attachment. Check your inbox.";
+    }
+
+
+
 }
