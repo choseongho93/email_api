@@ -1,0 +1,12 @@
+vendor
+node_modules
+.idea
+.env
+certbot.log
+resources/views/test
+tests
+storage/files/*
+/gmail
+/*.backup
+.DS_Store
+.phpunit*
