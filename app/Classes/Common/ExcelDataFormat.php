@@ -2,7 +2,7 @@
 
 namespace App\Classes\Common;
 
-use App\Constants\Common\ExcelConstants;
+use App\Constants\ExcelConstants;
 
 class ExcelDataFormat extends Excel
 {

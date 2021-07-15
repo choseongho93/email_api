@@ -1,5 +1,5 @@
 <?php
-namespace App\Constants\Common;
+namespace App\Constants;
 
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;

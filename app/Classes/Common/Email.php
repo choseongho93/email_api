@@ -2,13 +2,13 @@
 
 namespace App\Classes\Common;
 
-use App\Constants\Common\EmailConstants;
+use App\Constants\EmailConstants;
 use Illuminate\Support\Facades\Mail;
 
 class Email
 {
 
-    private $email_view_data = EmailConstants::EMAIL_VIEW_DATA; // HTML view 데이터
+    private $email_view_data; // HTML view 데이터
     private $to; // 받는 사람
     private $subject; // 제목
     private $cc; // 참조
